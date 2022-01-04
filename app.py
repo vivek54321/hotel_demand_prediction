@@ -214,4 +214,5 @@ def predict():
     return render_template('form.html', pred = f"'{output_final}'")
 #running the app-------------------------------------------
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
