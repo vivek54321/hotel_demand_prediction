@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<head>
+<style>
+    body{text-align:left;
+        background-image: url('static/bg-2.jpg');
+        width: 100vw;
+    }
+ .hotels{
+text-align:center ; 
+width: 50%;
+padding: 2rem;
+} 
+div{
+    color: white;
+    border-color: rgb(255, 0, 0);
+    font-size: 35px;
+    font: italic small-caps bold 22px Georgia,serif;
+    text-align: left;
+}
+</style>
+<script>
+    var subjectObject = {
+      "2017": {
+        "January":["January"],
+        "February":["February"],
+        "March":["March"],
+        'April':['April'],
+        'May':['May'],
+        'June':['June'],
+        'July':['July'],
+        'August' :['August']
+      },
+      "2016": {
+        "January":["January"],
+        "February":["February"],
+        "March":["March"],
+        'April':['April'],
+        'May':['May'],
+        'June':['June'],
+        'July':['July'],
+        'August' :['August'],
+        "September":["September"],
+        "October":["October"],
+        "November": ["November"],
+        "December": ["December"]
+      },
+      "2015": {
+        'July':['July'],
+        'August' :['August'],
+        "September":["September"],
+        "October":["October"],
+        "November": ["November"],
+        "December": ["December"]
+      }
+    }
+    window.onload = function() {
+      var subjectSel = document.getElementById("arrival_date_year");
+      var topicSel = document.getElementById("arrival_date_month");
+      for (var x in subjectObject) {
+        subjectSel.options[subjectSel.options.length] = new Option(x, x);
+      }
+      subjectSel.onchange = function() {
+        //empty Chapters- and Topics- dropdowns
+        topicSel.length = 1;
+        //display correct values
+        for (var y in subjectObject[this.value]) {
+          topicSel.options[topicSel.options.length] = new Option(y, y);
+        }
+      }
+    }
+    </script>
+    
+</head>
+<body>
+    <div class='hotels' style="background-image: url('static/bg8.jpeg');opacity:0.85; display: block; margin-right: auto; margin-left: auto;">
+        <h1 style="color:white; background-color:rgb(209, 188, 93)">Hotel Demand Prediction</h1>
+        <h2 style="color:white">Please provide the details</h2>
+        <form method="post" action="/predict">
+        <div>
+        stays_in_weekend_nights:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
+        <input type="number" name='stays_in_weekend_nights' min=0 max=500 id="arrival_month_year" style='width:200px;background-color:rgb(245, 245, 175)'><br><br>
+        </div>
+        <div>
+        adults:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="number" name='adult' min=0 id="arrival_month_year" style='width:200px;background-color:rgb(245, 245, 175)'><br><br>
+        </div>
+        <div>
+        children:&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="number" name='children' min=0 id="arrival_month_year" style='width:200px;background-color:rgb(245, 245, 175)'><br><br>
+        </div>
+        <div>
+            babies:&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" name='babies' min=0 id="arrival_month_year" style='width:200px;background-color:rgb(245, 245, 175)'><br><br>
+        </div>
+        <div>
+            is_repeated_guest:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
+            <select name='is_repeated_guest' style='width:200px;background-color:rgb(245, 245, 175)'>
+                <option name = 0 value=0>NO</option>
+                <option name=1 value=1>YES</option>
+            </select><br><br>
+        </div>
+        <div>
+            previous_cancellations:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;
+            <input type="number" name='previous_cancellations' min=0 id="previous_cancellations" style='width:200px;background-color:rgb(245, 245, 175)'><br><br>
+        </div>
+        <div>
+            required_car_parking_spaces:
+            <input type="number" name='required_car_parking_spaces' min=0 id="required_car_parking_spaces" style='width:200px;background-color:rgb(245, 245, 175)'><br><br>
+        </div>
+        <div>
+            total_of_special_requests:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" name='total_of_special_requests' min=0 id="total_of_special_requests"style='width:200px;background-color:rgb(245, 245, 175)'><br><br>
+        </div>
+        <div>
+            hotel : &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select id='hotel' name='hotel' style='width:200px;height:21px;background-color:rgb(245, 245, 175)'>
+                
+                <option name=1 value = 1>City Hotel</option>
+                <option name= 0 value = 0>Resort Hotel</option>
+            </select><br><br>
+        </div>
+
+            <!-- arrival_month_year:
+            <select>
+                <option>January</option>
+                <option>February</option>
+                <option>MARCH</option>
+                <option>APRIL</option>
+                <option>MAY</option>
+                <option>JUNE</option>
+                <option>JULY</option>
+                <option>AUGUST</option>
+                <option>SEPTEMBER</option>
+                <option>OCTOBER</option>
+                <option>NOVEMBER</option>
+                <option>DECEMBER</option>
+            </select> <br><br> -->
+        <div>
+            arrival_date_year:&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name='year'id = 'arrival_date_year' style='width:200px;height:21px;background-color:rgb(245, 245, 175)'required>
+                <option value="" selected="selected">Select year</option>
+                <!-- <option name =2015>2015</option>
+                <option name=2016>2016</option>
+                <option name=2017>2017</option> -->
+            </select><br><br>
+        </div>
+        <div>
+            arrival_date_month:&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name='month' id = 'arrival_date_month' style='width:200px;height:21px;background-color:rgb(245, 245, 175)' required>
+                <option value="" selected="selected">Please Select Year First</option>
+                <!-- <option name='January'>January</option>
+                <option name='February'>February</option>
+                <option name='March'>March</option>
+                <option name='April'>April</option>
+                <option name='May'>May</option>
+                <option name='June'>June</option>
+                <option name='July'>July</option>
+                <option name='August'>August</option>
+                <option name='September'>September</option>
+                <option name='October'>October</option>
+                <option name='November'>November</option>
+                <option name='December'>December</option> -->
+            </select> <br><br>
+        </div>
+        <div>
+            meal:&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name='meal' style='width:200px;height:21px;background-color:rgb(245, 245, 175)'>
+                <option name='BB'>BB</option>
+                <option name='FB'>FB</option>
+                <option name='HB'>HB</option>
+                <option name='SC'>SC</option>
+                <option name='Undefined'>Undefined</option>
+            </select><br><br>
+        </div>
+        <div>
+            market_segment:&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name='market_segment' style='width:200px;height:21px;background-color:rgb(245, 245, 175)'>
+                <option name='Online TA'>Online TA</option>
+                <option name='Corporate'>Corporate</option>
+                <option name='Direct'>Direct</option>
+                <option name='Complementary'>Complementary</option>
+                <option name='Undefined'>Undefined</option>
+                <option name='Offline TA/TO'>Offline TA/TO</option>
+                <option name='Groups'>Groups</option>
+            </select><br><Br>
+            </div><div>
+                distribution_channel:&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name='distribution_channel' style='width:200px;height:21px;background-color:rgb(245, 245, 175)'>
+                <option name='Undefined'>Undefined</option>
+                <option name='Direct'>Direct</option>
+                <option name='TA/TO'>TA/TO</option>
+                <option name='GDS'>GDS</option>
+            </select><br><Br>
+            </div>
+            <div>
+                reserved_room_type:&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name='reserved_room_type' style='width:200px;height:21px;background-color:rgb(245, 245, 175)'>
+                <option name='A'>A</option>
+                <option name='B'>B</option>
+                <option name='C'>C</option>
+                <option name='D'>D</option>
+                <option name='E'>E</option>
+                <option name='F'>F</option>
+                <option name='G'>G</option>
+                <option name='H'>H</option>
+                <option name='L'>L</option>
+                <option name='P'>P</option>
+            </select> <br><br>
+        </div>
+        <div>
+                deposit_type:&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name='deposit_type' style='width:200px;height:21px;background-color:rgb(245, 245, 175)'>
+                <option name='No Deposit'>No Deposit</option>
+                <option name = 'Non Refund'>Non Refund</option>
+                <option name='Refundable'>Refundable</option>
+            </select> <br><br>
+        </div>
+        <div>
+            customer_type:&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name='customer_type' style='width:200px;height:21px;background-color:rgb(245, 245, 175)'>
+                
+                <option name='Contract'>Contract</option>
+                <option name='Group'>Group</option>
+                <option name = 'Transient'>Transient</option>
+                <option name='Transient_party'>Transient_party</option>
+            </select> <br><br>
+        </div>
+        <div>
+            lead_time:&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" name='lead_time' min=0 max = 500 id="lead_time" placeholder="Enter a value between 0 to 500" style='width:200px;height:17px;background-color:rgb(245, 245, 175)' ><br><br>
+        </div>
+        <div>
+            arrival_date_day_of_month:&nbsp;
+            <input type="number" min=0 max=31 name="arrival_date_day_of_month" style='width:200px;background-color:rgb(245, 245, 175)' required><br><br>
+        </div>
+        <div>
+            stays_in_week_nights:&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" min=0 max=50 name="stays_in_week_nights" style='width:200px;background-color:rgb(245, 245, 175)' required><br><br>
+        </div>
+        <div>
+            agent:&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" min=0 name="agent" style='width:200px;background-color:rgb(245, 245, 175)'><br><br>
+        </div>
+        <div>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
+            &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp<input type="submit" Placeholder="Submit"  style='background-color:rgb(220, 223, 78);width:80px;color:rgb(15, 15, 15)'>&nbsp;&nbsp;
+            <input type="reset" Placeholder="Reset" style='background-color:rgb(220, 223, 78);width:80px;color:rgb(15, 15, 15)'>
+        </div>
+        
+                
+</form>
+</div>
+    {{pred}}
+
+
+</body>
+
+</html>
