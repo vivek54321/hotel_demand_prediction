@@ -135,84 +135,93 @@ def deposit_type(y):
         for i in dict7:
             z7.append(dict7[i])
         return z7
+# def predict():
+#       try:
+#         // total code
+#        except Exception:
+#         // render error template
+
 
 final_input_list=[]
 @app.route('/predict' , methods = ['post'])
 def predict():
-    stays_in_weekend_nights = request.form.get('stays_in_weekend_nights')
-    adult = request.form.get('adult')
-    children = request.form.get('children')
-    babies = request.form.get('babies')
-    is_repeated_guest = request.form.get('is_repeated_guest')
-    previous_cancellations = request.form.get('previous_cancellations')
-    required_car_parking_spaces=request.form.get('required_car_parking_spaces')
-    total_of_special_requests=request.form.get('total_of_special_requests')
-    hotel=request.form.get('hotel')
-    month = request.form.get('month')
-    year = request.form.get('year')
-    arrival_month_year1 = arrival_month_year(month,year)
-    meal1=request.form.get('meal')
-    meal2=meal(meal1)
-    market_segment1=request.form.get('market_segment')
+    try:
+        stays_in_weekend_nights = request.form.get('stays_in_weekend_nights')
+        adult = request.form.get('adult')
+        children = request.form.get('children')
+        babies = request.form.get('babies')
+        is_repeated_guest = request.form.get('is_repeated_guest')
+        previous_cancellations = request.form.get('previous_cancellations')
+        required_car_parking_spaces=request.form.get('required_car_parking_spaces')
+        total_of_special_requests=request.form.get('total_of_special_requests')
+        hotel=request.form.get('hotel')
+        month = request.form.get('month')
+        year = request.form.get('year')
+        arrival_month_year1 = arrival_month_year(month,year)
+        meal1=request.form.get('meal')
+        meal2=meal(meal1)
+        market_segment1=request.form.get('market_segment')
+        
+        #print(stays_in_weekend_nights,adult,children,babies,is_repeated_guest,previous_cancellations,required_car_parking_spaces,total_of_special_requests,hotel)
+        #arrival_month_year(month,year)
+        #meal(meal1)
+        market_segment2=market_segment(market_segment1)
+        distribution_channel1 = request.form.get('distribution_channel')
+        distribution_channel2=distribution_channel(distribution_channel1)
+        reserved_room_type1 = request.form.get('reserved_room_type')
+        reserved_room_type2=reserved_room_type(reserved_room_type1)
+        deposit_type1 = request.form.get('deposit_type')
+        deposit_type2 = deposit_type(deposit_type1)
+        customer_type1 = request.form.get('customer_type')
+        customer_type2=customer_type(customer_type1)
+        lead_time = request.form.get('lead_time')
+        arrival_date_day_of_month=request.form.get('arrival_date_day_of_month')
+        stays_in_week_nights=request.form.get('stays_in_week_nights')
+        agent=request.form.get('agent')
+        # print(lead_time,arrival_date_day_of_month,stays_in_week_nights,agent)
+
+
     
-    #print(stays_in_weekend_nights,adult,children,babies,is_repeated_guest,previous_cancellations,required_car_parking_spaces,total_of_special_requests,hotel)
-    #arrival_month_year(month,year)
-    #meal(meal1)
-    market_segment2=market_segment(market_segment1)
-    distribution_channel1 = request.form.get('distribution_channel')
-    distribution_channel2=distribution_channel(distribution_channel1)
-    reserved_room_type1 = request.form.get('reserved_room_type')
-    reserved_room_type2=reserved_room_type(reserved_room_type1)
-    deposit_type1 = request.form.get('deposit_type')
-    deposit_type2 = deposit_type(deposit_type1)
-    customer_type1 = request.form.get('customer_type')
-    customer_type2=customer_type(customer_type1)
-    lead_time = request.form.get('lead_time')
-    arrival_date_day_of_month=request.form.get('arrival_date_day_of_month')
-    stays_in_week_nights=request.form.get('stays_in_week_nights')
-    agent=request.form.get('agent')
-    # print(lead_time,arrival_date_day_of_month,stays_in_week_nights,agent)
+        
+        print(stays_in_weekend_nights,adult,children,babies,is_repeated_guest,previous_cancellations,required_car_parking_spaces,
+        total_of_special_requests,hotel,arrival_month_year1,meal2,market_segment2,distribution_channel2,reserved_room_type2,deposit_type2,customer_type2,lead_time
+        ,arrival_date_day_of_month,stays_in_week_nights,agent)
 
 
-    # final_input_list=[[stays_in_weekend_nights],[adult],[children],[babies],[is_repeated_guest],[previous_cancellations],[required_car_parking_spaces],
-    # [total_of_special_requests],[hotel],arrival_month_year1,meal2,market_segment2,distribution_channel1,reserved_room_type2,customer_type2,[lead_time]
-    # ,[arrival_date_day_of_month],[stays_in_week_nights],[agent]]
-    
-    print(stays_in_weekend_nights,adult,children,babies,is_repeated_guest,previous_cancellations,required_car_parking_spaces,
-    total_of_special_requests,hotel,arrival_month_year1,meal2,market_segment2,distribution_channel2,reserved_room_type2,deposit_type2,customer_type2,lead_time
-    ,arrival_date_day_of_month,stays_in_week_nights,agent)
+        final_input_list=[stays_in_weekend_nights,adult,children,babies,is_repeated_guest,previous_cancellations,required_car_parking_spaces,
+        total_of_special_requests,hotel,arrival_month_year1,meal2,market_segment2,distribution_channel2,reserved_room_type2,deposit_type2,
+        customer_type2,lead_time,arrival_date_day_of_month,stays_in_week_nights,agent]
 
 
-    final_input_list=[stays_in_weekend_nights,adult,children,babies,is_repeated_guest,previous_cancellations,required_car_parking_spaces,
-    total_of_special_requests,hotel,arrival_month_year1,meal2,market_segment2,distribution_channel2,reserved_room_type2,deposit_type2,
-    customer_type2,lead_time,arrival_date_day_of_month,stays_in_week_nights,agent]
+        final_input = []
+        
+        for i in range(0,len(final_input_list)):
+        
+            if type(final_input_list[i]) == list:
+                #print(final_input_list[i])
+                final_input.extend(final_input_list[i])
+            else:
+                #print(final_input_list[i])
+                final_input.append(final_input_list[i])
+            final_input = list(map(int,final_input))
+        # for i in final_input_list:
+        #     final_input.extend(list(i))
+        # final_input = list(map(int,final_input))
+        print(final_input)
 
-
-    final_input = []
-    
-    for i in range(0,len(final_input_list)):
-    
-        if type(final_input_list[i]) == list:
-            #print(final_input_list[i])
-            final_input.extend(final_input_list[i])
+        output = model.predict(np.array(final_input).reshape((1,len(final_input))))
+        if output[0]:
+            output_final = 'Hotel Booking was Cancelled'
         else:
-            #print(final_input_list[i])
-            final_input.append(final_input_list[i])
-        final_input = list(map(int,final_input))
-    # for i in final_input_list:
-    #     final_input.extend(list(i))
-    # final_input = list(map(int,final_input))
-    print(final_input)
+            output_final = 'Hotel Booking was Not Cancelled'
+        # return render_template('app.html')
+        return render_template('form.html', pred = f"'{output_final}'")
 
-    output = model.predict(np.array(final_input).reshape((1,len(final_input))))
-    print(output)
-    if output[0]:
-        output_final = 'Hotel Booking was Cancelled'
-    else:
-        output_final = 'Hotel Booking was Not Cancelled'
-    # return render_template('app.html')
-    return render_template('form.html', pred = f"'{output_final}'")
+    except Exception:
+        # // render error template
+        print('error logs')
+        return render_template('home.html')
+
 #running the app-------------------------------------------
 
-if __name__ == '__main__':
-    app.run(debug=True)
+app.run(debug=True)
